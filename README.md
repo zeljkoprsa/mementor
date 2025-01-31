@@ -1,4 +1,4 @@
-# Memory System Init
+# Mementor
 
 Documentation memory system for AI driven projects.
 

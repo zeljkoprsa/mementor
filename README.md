@@ -1,6 +1,6 @@
 # Memory System Init
 
-A Python package for initializing and managing a three-tier documentation memory system for your projects.
+Documentation memory system for AI driven projects.
 
 ## Features
 

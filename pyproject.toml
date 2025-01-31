@@ -3,13 +3,13 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "memory-system-init"
+name = "mementor"
 version = "0.1.0"
-description = "A tool to initialize and manage a three-tier documentation memory system"
+description = "Documentation memory system for AI driven projects"
 readme = "README.md"
 requires-python = ">=3.8"
 license = "MIT"
-keywords = ["documentation", "memory-management", "project-setup"]
+keywords = ["documentation", "memory-management", "project-setup", "ai-documentation"]
 authors = [
     { name = "Zeljko Prsa", email = "your.email@example.com" }
 ]
@@ -39,13 +39,13 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/zeljkoprsa/memory-system-init"
-Documentation = "https://github.com/zeljkoprsa/memory-system-init#readme"
-Repository = "https://github.com/zeljkoprsa/memory-system-init.git"
-Issues = "https://github.com/zeljkoprsa/memory-system-init/issues"
+Homepage = "https://github.com/zeljkoprsa/mementor"
+Documentation = "https://github.com/zeljkoprsa/mementor#readme"
+Repository = "https://github.com/zeljkoprsa/mementor.git"
+Issues = "https://github.com/zeljkoprsa/mementor/issues"
 
 [project.scripts]
-memory-system = "memory_system_init.cli:main"
+mementor = "mementor.cli:main"
 
 [tool.black]
 line-length = 88

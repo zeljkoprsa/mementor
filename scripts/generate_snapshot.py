@@ -96,7 +96,11 @@ def create_snapshot(doc_path: Path, output_dir: Path) -> None:
         print("Failed to create snapshot")
 
 if __name__ == "__main__":
+    # Get the project docs directory from the input file path
     doc_path = Path("docs/mementor_docs/activeContext.md")
-    output_dir = Path("docs/archives") / datetime.now().strftime("%Y")
+    project_docs_dir = doc_path.parent
+    
+    # Create archives within the project's documentation directory
+    output_dir = project_docs_dir / "archives" / datetime.now().strftime("%Y")
     output_dir.mkdir(parents=True, exist_ok=True)
     create_snapshot(doc_path, output_dir)

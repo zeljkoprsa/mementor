@@ -1,23 +1,25 @@
 # 📚 Mementor
 
-**Your documentation, always up-to-date and healthy**
+**Supercharge your AI development with living documentation**
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Why Mementor?
 
-🤔 **Ever wondered why your project documentation...**
-- Gets outdated so quickly?
-- Lacks important context?
-- Is hard to maintain?
-- Doesn't reflect the current state?
+🤖 **Using AI-powered development tools like Windsurf or Cursor?**
+AI assistants work best with up-to-date context about your project. But maintaining this context is challenging:
 
-✨ **Mementor solves these problems by:**
-- Automatically capturing documentation changes
-- Tracking documentation health
-- Integrating with your git workflow
-- Providing insights into documentation quality
+- Context gets fragmented across conversations
+- Key decisions get lost in chat history
+- Project state becomes unclear
+- AI responses lack important background
+
+✨ **Mementor is your AI development companion:**
+- Maintains living context for AI tools
+- Tracks decisions and progress automatically
+- Keeps documentation in sync with code
+- Ensures AI always has the full picture
 
 ## 🚀 Quick Start
 
@@ -34,69 +36,70 @@ vim docs/your-project/activeContext.md
 
 ## ✨ Key Features
 
-### 🔄 Living Documentation
-- **Active Context Tracking**: Capture decisions and changes as they happen
-- **Automatic Snapshots**: Documentation versioned with your code
-- **Health Metrics**: Know when docs need attention
+### 🤖 AI-First Documentation
+- **Context Management**: Keep AI tools informed about your project state
+- **Decision Tracking**: Record and reference architectural choices
+- **Progress Snapshots**: Automatic versioning with your code
+
+### 🧠 Three-Tier Memory System
+- **Active Context**: Current state and recent decisions (for AI tools)
+- **Progress Tracking**: Sprint goals and milestone tracking
+- **System Patterns**: Long-term architectural decisions
 
 ### 🎯 Smart Integration
-- **Git Hooks**: Automatic snapshots on commit
-- **Project-specific Spaces**: Isolated documentation per project
-- **Template System**: Consistent documentation structure
-
-### 📊 Health Dashboard
-- **Readability Scoring**: Ensure docs are easy to understand
-- **Progress Tracking**: Monitor documentation completion
-- **Link Validation**: Catch broken references early
+- **AI Tool Support**: Ready for Windsurf, Cursor, and other AI assistants
+- **Git Hooks**: Automatic context updates
+- **Health Metrics**: Ensure documentation serves AI tools effectively
 
 ## 🎯 Use Cases
 
-### For Developers
+### AI-Driven Development
 ```bash
-# Record a design decision
+# Update context for AI tools
 vim docs/your-project/activeContext.md
-git commit -m "docs: add API authentication decision"
+git commit -m "docs: add authentication flow context"
+
 # Mementor automatically:
-# ✓ Generates snapshot
-# ✓ Calculates health metrics
-# ✓ Archives the changes
+# ✓ Updates AI context
+# ✓ Preserves decision history
+# ✓ Maintains knowledge continuity
 ```
 
-### For Tech Leads
+### Sprint Planning with AI
 ```bash
-# Check documentation health
-mementor health
+# Track sprint progress
+mementor progress
 
-# Review recent decisions
-mementor history --days 7
+# Update sprint context
+vim docs/your-project/progress.md
 
-# Track documentation progress
-mementor metrics --trend
+# Let AI analyze progress
+mementor analyze --sprint-current
 ```
 
-### For Teams
+### Team Collaboration
 ```bash
-# Set up team standards
-mementor init --template team-standard
+# Share context with AI tools
+mementor context --share
 
-# Monitor documentation quality
-mementor report --weekly
+# Review AI-assisted decisions
+mementor decisions --recent
 
-# Review documentation changes
-mementor diff HEAD~1
+# Track architectural evolution
+mementor patterns --timeline
 ```
 
 ## 📈 Benefits
 
-### 🎯 Immediate Impact
-- **No More Stale Docs**: Automatic updates and health checks
-- **Context Preservation**: Capture decisions as they happen
-- **Quality Insights**: Know what needs improvement
+### 🤖 AI Development
+- **Smarter AI Assistance**: AI tools always have current context
+- **Continuous Learning**: AI understands your project's evolution
+- **Context Preservation**: Key decisions available for future AI interactions
 
-### 💪 Long-term Value
-- **Knowledge Retention**: Never lose important context
-- **Reduced Maintenance**: Automated health monitoring
-- **Better Collaboration**: Clear, up-to-date documentation
+### 💪 Team Empowerment
+- **AI-Ready Documentation**: Structured for both humans and AI
+- **Knowledge Continuity**: No context loss between AI sessions
+- **Reduced Cognitive Load**: Let AI handle context management
 
 ## 🔗 Next Steps
 

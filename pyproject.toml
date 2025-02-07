@@ -1,6 +1,6 @@
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
 
 [project]
 name = "mementor"
@@ -21,12 +21,6 @@ classifiers = [
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
-]
-dependencies = [
-    "click>=8.0.0",
-    "pyyaml>=6.0.0",
-    "rich>=10.0.0",
-    "python-crontab>=2.6.0",
 ]
 
 [project.optional-dependencies]
@@ -55,3 +49,18 @@ include = "\\.pyi?$"
 [tool.isort]
 profile = "black"
 multi_line_output = 3
+
+[tool.poetry]
+name = "mementor"
+version = "0.1.0"
+description = "Documentation memory system manager"
+authors = ["Your Name <your.email@example.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.12"
+click = "^8.0.0"
+pyyaml = "^6.0.0"
+rich = "^10.0.0"
+python-crontab = "^2.6.0"
+pystache = "^0.8.2"

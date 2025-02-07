@@ -3,7 +3,7 @@
 ## System Overview
 
 ### Purpose
-memory-system-init is a Python package that helps initialize and manage a three-tier documentation memory system for software projects.
+Mementor is a Python package that helps initialize and manage a three-tier documentation memory system for software projects.
 
 ### Core Features
 1. Documentation System Initialization
@@ -35,7 +35,7 @@ def cli():
 @click.argument("directory", type=click.Path(), default=".")
 @click.option("--config", type=click.Path(), help="Custom config file")
 def init(directory: str, config: Optional[str] = None):
-    """Initialize memory system in the specified directory."""
+    """Initialize mementor in the specified directory."""
     pass
 ```
 

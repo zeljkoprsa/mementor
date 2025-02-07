@@ -1,0 +1,12 @@
+{{! templates/active_context.mustache }}
+# {{ project_name }} Active Context
+
+## Recent Decisions ({{ decision_date }})
+{{#decisions}}
+- {{.}}
+{{/decisions}}
+
+## Next Steps
+{{#next_steps}}
+- [{{#completed}}X{{/completed}}{{^completed}} {{/completed}}] {{ description }}
+{{/next_steps}}

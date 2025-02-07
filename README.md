@@ -115,7 +115,9 @@ We love contributions! See our [Contributing Guide](CONTRIBUTING.md) for ways to
 
 ## 📄 License
 
-MIT © [2025 Mementor](LICENSE)
+Mementor is open-source software licensed under the [MIT License](LICENSE). © 2025 Zeljko Prsa
+
+Feel free to use it for both personal and commercial projects!
             └── context_snapshot.md
 ```
 
@@ -139,7 +141,3 @@ project:
 3. Commit your changes
 4. Push to the branch
 5. Create a Pull Request
-
-## License
-
-MIT License - see LICENSE file for details

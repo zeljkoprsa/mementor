@@ -11,24 +11,124 @@ from memory_system_init.templates import (
     TemplateRegistry
 )
 
-def calculate_health_metrics(doc_path: Path) -> HealthMetrics:
-    """Calculate health metrics for a documentation file."""
-    content = doc_path.read_text()
-    words = len(content.split())
-    has_todos = "TODO" in content or "[ ]" in content
-    linked_files = []  # TODO: Implement link detection
+import re
+from datetime import datetime, timedelta
+from typing import List, Tuple
+
+def extract_sections(content: str) -> List[Tuple[int, str, str]]:
+    """Extract section headers with their levels and content."""
+    lines = content.split('\n')
+    sections = []
+    current_section = None
+    current_content = []
     
-    # Simple completion metric based on TODO count
+    for line in lines:
+        if line.startswith('#'):
+            if current_section:
+                sections.append((current_section[0], current_section[1], '\n'.join(current_content)))
+            level = len(re.match(r'^#+', line).group())
+            title = line.lstrip('#').strip()
+            current_section = (level, title)
+            current_content = []
+        else:
+            current_content.append(line)
+            
+    if current_section:
+        sections.append((current_section[0], current_section[1], '\n'.join(current_content)))
+    
+    return sections
+
+def calculate_readability(text: str) -> float:
+    """Calculate Flesch reading ease score."""
+    sentences = len(re.split(r'[.!?]+', text))
+    words = len(text.split())
+    syllables = len(re.findall(r'[aeiou]+', text.lower()))
+    
+    if sentences == 0 or words == 0:
+        return 0.0
+    
+    # Flesch Reading Ease = 206.835 - 1.015 × (words/sentences) - 84.6 × (syllables/words)
+    score = 206.835 - 1.015 * (words/sentences) - 84.6 * (syllables/words)
+    return max(0.0, min(100.0, score))  # Clamp between 0 and 100
+
+def find_links(content: str) -> Tuple[List[str], List[str]]:
+    """Find all links and check if they're valid."""
+    # Find markdown links [text](url) and bare URLs
+    link_pattern = r'\[([^\]]+)\]\(([^)]+)\)|<([^>]+)>|(?:https?://[^\s]+)'
+    links = re.findall(link_pattern, content)
+    
+    valid_links = []
+    broken_links = []
+    
+    for link in links:
+        # Extract URL from different capture groups
+        url = link[1] if link[1] else link[2] if link[2] else link[0]
+        
+        # Basic validation (could be enhanced with actual HTTP checks)
+        if url.startswith(('http://', 'https://', '/', './')):
+            valid_links.append(url)
+        else:
+            broken_links.append(url)
+    
+    return valid_links, broken_links
+
+def calculate_health_metrics(doc_path: Path) -> HealthMetrics:
+    """Calculate comprehensive health metrics for a documentation file."""
+    content = doc_path.read_text()
+    
+    # Basic metrics
+    words = len(content.split())
+    reading_time = words / 200  # Average reading speed of 200 WPM
+    
+    # TODO detection
+    has_todos = "TODO" in content or "[ ]" in content
+    todo_count = content.count("TODO") + content.count("[ ]")
+    
+    # Link analysis
+    linked_files, broken_links = find_links(content)
+    
+    # Completion metrics
     total_items = content.count("- [")
     completed_items = content.count("- [X]") + content.count("- [✓]")
     completion = (completed_items / total_items * 100) if total_items > 0 else 100
     
+    # Section analysis
+    sections = extract_sections(content)
+    section_count = len(sections)
+    section_depth = max(level for level, _, _ in sections) if sections else 0
+    total_section_words = sum(len(content.split()) for _, _, content in sections)
+    avg_section_length = total_section_words / section_count if section_count > 0 else 0
+    
+    # Code block detection
+    code_blocks = len(re.findall(r'```[^`]*```', content, re.DOTALL))
+    
+    # Calculate readability
+    readability_score = calculate_readability(content)
+    
+    # Calculate time since last snapshot
+    archives_dir = doc_path.parent / "archives"
+    last_snapshot_delta = 0.0
+    if archives_dir.exists():
+        snapshots = list(archives_dir.rglob("*.md"))
+        if snapshots:
+            latest = max(snapshots, key=lambda p: p.stat().st_mtime)
+            last_snapshot_delta = (datetime.now() - datetime.fromtimestamp(latest.stat().st_mtime)).days
+    
     return HealthMetrics(
         last_updated=datetime.fromtimestamp(doc_path.stat().st_mtime),
         word_count=words,
+        reading_time=reading_time,
         has_todos=has_todos,
+        todo_count=todo_count,
         linked_files=linked_files,
-        completion_percentage=completion
+        broken_links=broken_links,
+        completion_percentage=completion,
+        section_count=section_count,
+        section_depth=section_depth,
+        code_blocks=code_blocks,
+        avg_section_length=avg_section_length,
+        readability_score=readability_score,
+        last_snapshot_delta=last_snapshot_delta
     )
 
 def create_snapshot(doc_path: Path, output_dir: Path) -> None:

@@ -5,12 +5,38 @@ from pathlib import Path
 
 @dataclass
 class HealthMetrics:
-    """Health metrics for documentation files."""
+    """Health metrics for documentation files.
+    
+    Attributes:
+        last_updated: Last modification time
+        word_count: Total number of words
+        reading_time: Estimated reading time in minutes
+        has_todos: Whether TODOs are present
+        todo_count: Number of open TODOs
+        linked_files: List of linked files/documents
+        broken_links: List of broken/invalid links
+        completion_percentage: Percentage of completed items
+        section_count: Number of sections (h1, h2, etc)
+        section_depth: Maximum section nesting depth
+        code_blocks: Number of code blocks
+        avg_section_length: Average words per section
+        readability_score: Flesch reading ease score
+        last_snapshot_delta: Days since last snapshot
+    """
     last_updated: datetime
     word_count: int
+    reading_time: float
     has_todos: bool
+    todo_count: int
     linked_files: List[str]
+    broken_links: List[str]
     completion_percentage: float
+    section_count: int
+    section_depth: int
+    code_blocks: int
+    avg_section_length: float
+    readability_score: float
+    last_snapshot_delta: float = 0.0
 
 @dataclass
 class DocumentationMetadata:
@@ -77,12 +103,35 @@ class TemplateRegistry:
                 header.append(f"- {dep['name']} ({dep['version']})")
         
         if metadata.health_metrics:
-            header.append("\nHealth Metrics:")
             metrics = metadata.health_metrics
-            header.append(f"- Last Updated: {metrics.last_updated.isoformat()}")
-            header.append(f"- Word Count: {metrics.word_count}")
-            header.append(f"- Completion: {metrics.completion_percentage}%")
-            header.append(f"- TODOs Present: {'Yes' if metrics.has_todos else 'No'}")
+            
+            # Content Metrics
+            header.append("\nContent Metrics:")
+            header.append(f"- Word Count: {metrics.word_count} words")
+            header.append(f"- Reading Time: {metrics.reading_time:.1f} minutes")
+            header.append(f"- Readability Score: {metrics.readability_score:.1f}/100.0")
+            
+            # Structure Metrics
+            header.append("\nStructure Metrics:")
+            header.append(f"- Sections: {metrics.section_count} (max depth: {metrics.section_depth})")
+            header.append(f"- Average Section Length: {metrics.avg_section_length:.1f} words")
+            header.append(f"- Code Blocks: {metrics.code_blocks}")
+            
+            # Progress Metrics
+            header.append("\nProgress Metrics:")
+            header.append(f"- Completion: {metrics.completion_percentage:.1f}%")
+            header.append(f"- Open TODOs: {metrics.todo_count}")
+            header.append(f"- Days Since Last Snapshot: {metrics.last_snapshot_delta:.1f}")
+            
+            # Link Health
+            if metrics.linked_files or metrics.broken_links:
+                header.append("\nLink Health:")
+                if metrics.linked_files:
+                    header.append(f"- Valid Links: {len(metrics.linked_files)}")
+                if metrics.broken_links:
+                    header.append(f"- Broken Links: {len(metrics.broken_links)}")
+                    for link in metrics.broken_links:
+                        header.append(f"  • {link}")
             
         if metadata.tags:
             header.append(f"\nTags: {', '.join(metadata.tags)}")

@@ -104,8 +104,10 @@ mementor patterns --timeline
 ## 🔗 Next Steps
 
 - 📖 [Detailed Usage Guide](docs/mementor_docs/USAGE.md)
-- 🛠️ [Configuration Options](docs/mementor_docs/CONFIGURATION.md)
-- 🎨 [Template Gallery](docs/mementor_docs/TEMPLATES.md)
+- 🛠️ Configuration Options *(coming soon)*
+- 🎨 Template Gallery *(coming soon)*
+
+Want to contribute? Help us build these guides!
 
 ## 💡 Contributing
 

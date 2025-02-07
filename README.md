@@ -1,54 +1,93 @@
-# Memory System Init
+# Mementor
 
-Documentation memory system for AI driven projects.
+An intelligent documentation management system that helps maintain living documentation through automated snapshots, health metrics, and git integration.
 
 ## Features
 
-- Three-tier memory management:
+### Documentation Management
+- **Three-tier Memory System**:
   - Short-term: Active context tracking
   - Mid-term: Knowledge base documentation
-  - Long-term: System patterns
-- Automated snapshot creation
-- Customizable templates
-- Git integration
-- CLI interface
+  - Long-term: System patterns and archives
+- **Project-specific Documentation**:
+  - Isolated documentation spaces
+  - Custom templates and configurations
+  - Automatic directory structure
 
-## Installation
+### Automated Snapshots
+- **Git Integration**:
+  - Pre-commit hooks for automatic snapshots
+  - Documentation change detection
+  - Automatic staging of snapshots
+- **Comprehensive Health Metrics**:
+  - Content quality (readability, length, reading time)
+  - Document structure (sections, depth, code blocks)
+  - Progress tracking (completion, TODOs, snapshot frequency)
+  - Link validation and health checks
 
-```bash
-pip install memory-system-init
-```
+### Template System
+- **Customizable Templates**:
+  - Mustache-based templating
+  - Metadata support
+  - Version tracking
+- **Smart Metadata**:
+  - Automatic health metrics
+  - Dependency tracking
+  - Change detection
 
 ## Quick Start
 
-Initialize the memory system in your project:
+### 1. Installation
 
 ```bash
-# Basic initialization
-memory-system init
+# Install Mementor and its dependencies
+pip install mementor
 
-# With custom configuration
-memory-system init --config custom_config.yaml
-
-# In a specific directory
-memory-system init /path/to/project
+# Install pre-commit for git integration
+pip install pre-commit
 ```
 
-## Documentation Structure
+### 2. Project Integration
 
-The system creates the following structure:
+```bash
+# Initialize Mementor in your project
+mementor init
+
+# Install git hooks
+pre-commit install
+```
+
+### 3. Configuration
+
+Create or update your `pyproject.toml`:
+
+```toml
+[tool.mementor]
+project_name = "your-project"
+docs_dir = "docs/your-project-docs"
+template_dir = "templates"
+
+[tool.mementor.metrics]
+min_readability_score = 60.0
+max_section_depth = 3
+max_todos = 10
+```
+
+### 4. Directory Structure
+
+Mementor creates the following structure:
 
 ```
 docs/
-├── activeContext.md    # Short-term memory
-├── productContext.md   # Product documentation
-├── progress.md        # Progress tracking
-├── structure.md       # Documentation structure
-├── systemPatterns.md  # Long-term patterns
-├── techContext.md     # Technical documentation
-└── archives/         # Bi-weekly snapshots
-    └── YYYY/
-        └── WXX/
+└── your-project-docs/     # Project-specific documentation
+    ├── activeContext.md    # Short-term decisions
+    ├── progress.md         # Progress tracking
+    ├── structure.md        # Documentation structure
+    ├── systemPatterns.md   # System patterns
+    └── archives/           # Automated snapshots
+        └── YYYY/
+            └── snapshot_YYYYMMDD_HHMMSS.md
+```
             └── context_snapshot.md
 ```
 
